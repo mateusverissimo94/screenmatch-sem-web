@@ -1,16 +1,13 @@
 package br.com.screenmatch.principal;
 
-import br.com.screenmatch.model.DadosEpisodio;
 import br.com.screenmatch.model.DadosSerie;
 import br.com.screenmatch.model.DadosTemporada;
-import br.com.screenmatch.model.Episodio;
 import br.com.screenmatch.service.ConsumoAPI;
 import br.com.screenmatch.service.ConverteDados;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Principal {
     private Scanner leitura = new Scanner(System.in);
@@ -48,8 +45,10 @@ public class Principal {
                     break;
                 case 0:
                     System.out.println("Saindo...");
+                    break;
                 default:
-                    System.out.println("Opão inválida");
+                    System.out.println("Opção inválida");
+                    break;
             }
         }
     }

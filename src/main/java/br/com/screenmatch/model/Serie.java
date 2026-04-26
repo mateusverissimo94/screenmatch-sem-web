@@ -1,5 +1,7 @@
 package br.com.screenmatch.model;
 
+import br.com.screenmatch.service.traducao.ConsultaMyMemory;
+
 import java.util.Optional;
 import java.util.OptionalDouble;
 
@@ -19,7 +21,7 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        this.sinopse = dadosSerie.sinopse();
+        this.sinopse = ConsultaMyMemory.obterTraducao(dadosSerie.sinopse()).trim();
     }
 
     public String getTitulo() {
@@ -80,14 +82,12 @@ public class Serie {
 
     @Override
     public String toString() {
-        return "Serie{" +
-                "genero=" + genero +
+        return "genero=" + genero +
                 ", titulo='" + titulo + '\'' +
                 ", totalTemporadas=" + totalTemporadas +
                 ", avaliacao=" + avaliacao +
                 ", atores='" + atores + '\'' +
                 ", poster='" + poster + '\'' +
-                ", sinopse='" + sinopse + '\'' +
-                '}';
+                ", sinopse='" + sinopse + '\'';
     }
 }

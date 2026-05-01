@@ -64,6 +64,9 @@ public class Principal {
                 case 7:
                     buscarSeriesPorCategoria();
                     break;
+                case 8:
+                    buscarSeriesPorTemporadaEAvaliacao();
+                    break;
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -165,5 +168,19 @@ public class Principal {
         System.out.println("Séries da categoria: " + nomeGenero);
         seriesPorCategoria.forEach(System.out::println);
 
+    }
+
+    private void buscarSeriesPorTemporadaEAvaliacao() {
+        System.out.println("Filtrar séries até quantas temporadas? ");
+        var totalTemporadas = leitura.nextInt();
+        leitura.nextLine();
+        System.out.println("Avaliação a partir de que valor: ");
+        var avaliacao = leitura.nextDouble();
+        leitura.nextLine();
+        List<Serie> seriesPorTemporadasEAvaliacao =
+                repositorio.seriesPorTemporadaEAvaliacao(totalTemporadas, avaliacao);
+        System.out.println("*** Séries filtradas ***");
+        seriesPorTemporadasEAvaliacao.forEach(s ->
+                System.out.println(s.getTitulo() + ", temporadas: " + s.getTotalTemporadas() + ", Avaliação: " + s.getAvaliacao()));
     }
 }

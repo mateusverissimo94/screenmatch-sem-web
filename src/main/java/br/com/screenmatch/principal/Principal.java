@@ -1,9 +1,6 @@
 package br.com.screenmatch.principal;
 
-import br.com.screenmatch.model.DadosSerie;
-import br.com.screenmatch.model.DadosTemporada;
-import br.com.screenmatch.model.Episodio;
-import br.com.screenmatch.model.Serie;
+import br.com.screenmatch.model.*;
 import br.com.screenmatch.repository.SerieRepository;
 import br.com.screenmatch.service.ConsumoAPI;
 import br.com.screenmatch.service.ConverteDados;
@@ -35,6 +32,8 @@ public class Principal {
                     4 - Buscar série por título
                     5 - Buscar séries por ator
                     6 - Top 5 Séries
+                    7 - Buscar séries por categoria
+                    8 - Filtrar séries por temporadas e avaliação
                     
                     0 - sair
                     """;
@@ -61,6 +60,9 @@ public class Principal {
                     break;
                 case 6:
                     buscarTop5Series();
+                    break;
+                case 7:
+                    buscarSeriesPorCategoria();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -153,5 +155,15 @@ public class Principal {
     private void buscarTop5Series() {
         List<Serie> serieTop = repositorio.findTop5ByOrderByAvaliacaoDesc();
         serieTop.forEach(s -> System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+    }
+
+    private void buscarSeriesPorCategoria() {
+        System.out.println("Deseja buscar séries de que categoria/gênero? ");
+        var nomeGenero = leitura.nextLine();
+        Categoria categoria = Categoria.fromPortugues(nomeGenero);
+        List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
+        System.out.println("Séries da categoria: " + nomeGenero);
+        seriesPorCategoria.forEach(System.out::println);
+
     }
 }
